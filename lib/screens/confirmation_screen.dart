@@ -13,107 +13,131 @@ class ConfirmationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5), // Light gray background to match image
+      backgroundColor: const Color(0xFFF5F5F5), // Light brown/gray background to match screenshot
       body: SafeArea(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center, // Center the entire content vertically
           children: [
-            // Header with X close button
+            // Header with X close button at top right
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: const Icon(
-                      Icons.close,
-                      color: Colors.brown,
-                      size: 24,
+                    onTap: () => Navigator.pop(context), // Go to previous screen
+                    child: Container(
+                      width: 32,
+                      height: 32,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 4,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: const Icon(
+                        Icons.close,
+                        color: Colors.brown,
+                        size: 20,
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
-            const Spacer(),
-            // Illustration placeholder (stressed doctor figure - use Container for simplicity, replace with asset image if available)
-            Container(
-              width: 160,
-              height: 160,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.brown.withOpacity(0.1),
-                    blurRadius: 10,
-                    spreadRadius: 2,
-                  ),
-                ],
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Icon(
-                  Icons.warning_amber_rounded, // Placeholder; replace with Image.asset('assets/illustration.png')
-                  size: 80,
-                  color: Colors.orange,
-                ),
+            // Illustration (stressed doctor figure - placeholder; replace with Image.asset('assets/doctor_stressed.png'))
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Container(
+                width: 140,
+                height: 140,
+                
               ),
             ),
             const SizedBox(height: 24),
-            // Confirmation Card
-            Container(
-              width: double.infinity,
-              margin: const EdgeInsets.symmetric(horizontal: 24.0),
-              padding: const EdgeInsets.all(24.0),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.brown.withOpacity(0.1),
-                    blurRadius: 15,
-                    spreadRadius: 2,
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  Text(
-                    'Stress Level set to $stressLevel',
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.brown,
+            // Confirmation Card - centered horizontally
+            Center(
+              child: Container(
+                width: double.infinity,
+                constraints: const BoxConstraints(maxWidth: 320), // Limit max width for centering on larger screens
+                margin: const EdgeInsets.symmetric(horizontal: 24.0),
+                padding: const EdgeInsets.all(24.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.brown.withOpacity(0.1),
+                      blurRadius: 15,
+                      spreadRadius: 2,
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 12),
-                  Text(
-                    'Stress Condition has been updated.',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[600],
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      'Stress Level set to $stressLevel',
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.brown,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Data sent to Doctor Freud AI.',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[600],
+                    const SizedBox(height: 12),
+                    Text(
+                      'Stress Condition has been updated.',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey[600],
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
+                    const SizedBox(height: 8),
+                    Text(
+                      'Data sent to Doctor Freud AI.',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey[600],
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 20),
+                    // Photo placeholder (for the captured photo)
+                    Container(
+                      width: double.infinity,
+                      height: 200,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.grey[300]!),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.asset(
+                          'assets/images/photo.jpg', // Ganti dengan path gambar lo
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: double.infinity,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             const Spacer(),
-            // Got it button
+            // Got it button - centered
             Padding(
               padding: const EdgeInsets.all(24.0),
               child: SizedBox(
                 width: double.infinity,
+                // constraints: const BoxConstraints(maxWidth: 320), // Limit max width for centering
                 height: 56,
                 child: ElevatedButton(
                   onPressed: onGotIt,
